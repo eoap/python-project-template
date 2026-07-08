@@ -1,5 +1,5 @@
 <!--
-Copyright 2026 Terradue
+Copyright 2026 EOAP
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-# Terradue Python Project Template
+# EOAP Python Project Template
 
-This repository is a reusable **Copier project archetype** for bootstrapping Terradue-style Python packages.
+This repository is a reusable **Copier project archetype** for bootstrapping EOAP-style Python packages.
 
 It is intended to be deployed as a dedicated GitHub repository, for example:
 
 ```text
-Terradue/python-project-template
+EOAP/python-project-template
 ```
 
 Generated projects include:
@@ -32,7 +32,7 @@ Generated projects include:
 - a top-level `CHANGELOG.md` following Keep a Changelog conventions;
 - Diátaxis documentation under `docs/`;
 - a top-level `mkdocs.yaml` wired directly to the generated documentation;
-- a `Taskfile.yaml` configured for `Terradue/taskfile-utils` remote Taskfiles;
+- a `Taskfile.yaml` configured for `EOAP/taskfile-utils` remote Taskfiles;
 - a `.env.example` enabling remote Taskfiles with `TASK_X_REMOTE_TASKFILES=1`;
 - GitHub Actions for quality checks, tests, package build, and documentation build;
 - a `src/` package layout and initial tests.
@@ -80,7 +80,7 @@ Install Task if you want to use the generated `Taskfile.yaml` locally. Follow yo
 Create an empty GitHub repository, for example:
 
 ```text
-https://github.com/Terradue/python-project-template
+https://github.com/EOAP/python-project-template
 ```
 
 Then push this archetype into it:
@@ -90,7 +90,7 @@ git init
 git add .
 git commit -m "Initial Python project template"
 git branch -M main
-git remote add origin git@github.com:Terradue/python-project-template.git
+git remote add origin git@github.com:EOAP/python-project-template.git
 git push -u origin main
 ```
 
@@ -110,7 +110,7 @@ Prefer generating projects from a tag rather than directly from `main`.
 From another directory, run:
 
 ```bash
-copier copy gh:Terradue/python-project-template@v0.1.0 my-new-project
+copier copy gh:EOAP/python-project-template@v0.1.0 my-new-project
 ```
 
 Copier will ask for project metadata such as project name, package name, author, repository URL, and documentation URL.
@@ -135,7 +135,7 @@ Copy the environment example file:
 cp .env.example .env
 ```
 
-The `.env` file is required because the generated `Taskfile.yaml` uses remote Taskfiles from `Terradue/taskfile-utils`, and remote Taskfiles require:
+The `.env` file is required because the generated `Taskfile.yaml` uses remote Taskfiles from `EOAP/taskfile-utils`, and remote Taskfiles require:
 
 ```env
 TASK_X_REMOTE_TASKFILES=1
