@@ -1,0 +1,109 @@
+# Copyright {{ copyright_year }} {{ author_name }}
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "{{ project_slug }}"
+dynamic = ["version"]
+description = "{{ project_description }}"
+readme = "README.md"
+requires-python = ">={{ python_version }}"
+license = "Apache-2.0"
+authors = [
+  { name = "{{ author_name }}", email = "{{ author_email }}" },
+]
+keywords = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "{{ repository_url }}"
+Documentation = "{{ documentation_url }}"
+Repository = "{{ repository_url }}"
+Issues = "{{ repository_url }}/issues"
+Changelog = "{{ repository_url }}/blob/main/CHANGELOG.md"
+
+[project.scripts]
+{{ python_package }} = "{{ python_package }}.cli:main"
+
+[tool.hatch.version]
+path = "src/{{ python_package }}/__about__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/tests",
+  "/docs",
+  "/README.md",
+  "/CHANGELOG.md",
+  "/LICENSE",
+  "/NOTICE",
+  "/pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/{{ python_package }}"]
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest>=8",
+  "pytest-cov>=5",
+  "ruff>=0.6",
+  "mypy>=1.10",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+cov = "pytest --cov={{ python_package }} --cov-report=term-missing --cov-report=xml {args:tests}"
+lint = "ruff check src tests"
+format = "ruff format src tests"
+typecheck = "mypy src/{{ python_package }}"
+quality = ["lint", "typecheck", "test"]
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs>=1.6",
+  "mkdocs-material>=9.5",
+  "mkdocstrings[python]>=0.25",
+]
+
+[tool.hatch.envs.docs.scripts]
+serve = "mkdocs serve -f mkdocs.yaml"
+build = "mkdocs build -f mkdocs.yaml --strict"
+
+[tool.ruff]
+target-version = "py{{ python_version|replace('.', '') }}"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
+
+[tool.mypy]
+python_version = "{{ python_version }}"
+strict = true
+packages = ["{{ python_package }}"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]

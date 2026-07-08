@@ -1,0 +1,87 @@
+# Copyright {{ copyright_year }} {{ author_name }}
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: '3'
+
+dotenv:
+  - .env
+
+# Remote includes require TASK_X_REMOTE_TASKFILES=1; copy .env.example to .env.
+includes:
+  pip_utils: https://raw.githubusercontent.com/Terradue/taskfile-utils/refs/heads/main/pip.yaml
+
+tasks:
+  default:
+    desc: List available tasks
+    cmds:
+      - task --list
+
+  install:
+    desc: Create the default Hatch environment
+    cmds:
+      - hatch env create
+
+  format:
+    desc: Format Python sources
+    cmds:
+      - hatch run format
+
+  lint:
+    desc: Lint Python sources
+    cmds:
+      - hatch run lint
+
+  typecheck:
+    desc: Type-check Python sources
+    cmds:
+      - hatch run typecheck
+
+  test:
+    desc: Run tests
+    cmds:
+      - hatch run test
+
+  coverage:
+    desc: Run tests with coverage
+    cmds:
+      - hatch run cov
+
+  docs:serve:
+    desc: Serve MkDocs locally
+    deps:
+      - task: pip_utils:conditional_install
+        vars:
+          PACKAGE: hatch
+    cmds:
+      - hatch run docs:serve
+
+  docs:build:
+    desc: Build MkDocs documentation in strict mode
+    deps:
+      - task: pip_utils:conditional_install
+        vars:
+          PACKAGE: hatch
+    cmds:
+      - hatch run docs:build
+
+  build:
+    desc: Build Python package distributions
+    cmds:
+      - hatch build
+
+  quality:
+    desc: Run the local quality gate
+    cmds:
+      - hatch run quality
+      - hatch run docs:build
