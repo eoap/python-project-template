@@ -27,9 +27,6 @@ permissions:
   contents: read
   packages: write
 
-env:
-  IMAGE_ID: ghcr.io/eoepca/eoap-cwlwrap/eoap-cwlwrap
-
 jobs:
 
   build:
@@ -51,7 +48,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v6.3.0
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
         cache: "pip"
 
     - name: Install tooling
@@ -133,28 +130,3 @@ jobs:
 
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@v1.14.0
-
-    # -----------------------------
-    # Determine container tag
-    # -----------------------------
-    - name: Determine image tag
-      run: |
-        if [[ "${GITHUB_REF}" == refs/heads/develop ]]; then
-          echo "IMAGE_TAG=latest-dev" >> $GITHUB_ENV
-        elif [[ "${GITHUB_REF}" == refs/heads/main ]]; then
-          echo "IMAGE_TAG=latest" >> $GITHUB_ENV
-        elif [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
-          VERSION=${GITHUB_REF#refs/tags/v}
-          echo "IMAGE_TAG=$VERSION" >> $GITHUB_ENV
-        fi
-
-    - name: Login to GHCR
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-    - name: Build container
-      run: |
-        docker build . -f Dockerfile -t eoap-cwlwrap
-        docker tag eoap-cwlwrap $IMAGE_ID:${IMAGE_TAG}
-
-    - name: Push container
-      run: docker push $IMAGE_ID:${IMAGE_TAG}
