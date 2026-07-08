@@ -110,7 +110,7 @@ Prefer generating projects from a tag rather than directly from `main`.
 From another directory, run:
 
 ```bash
-copier copy gh:EOAP/python-project-template@v0.1.0 my-new-project
+copier copy --vcs-ref v0.1.0 https://github.com/eoap/python-project-template.git stripodi-test
 ```
 
 Copier will ask for project metadata such as project name, package name, author, repository URL, and documentation URL.
