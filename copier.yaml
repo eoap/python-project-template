@@ -70,11 +70,6 @@ copyright_year:
   help: Copyright year
   default: "2026"
 
-python_version:
-  type: str
-  help: Minimum supported Python version
-  default: "3.10"
-
 license_id:
   type: str
   help: SPDX license identifier

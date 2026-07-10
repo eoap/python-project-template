@@ -22,6 +22,31 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [0.2.0] - 2026-07-10
+
+### Changed
+
+- `Taskfile.yaml` aligned according to common Terradue practices.
+- `pyproject.toml` aligned according to common Terradue practices.
+- Improved classifiers in `pyproject.toml`.
+
+### Fixed
+
+- `license_id` in `pyproject.toml` was hardcoded.
+- Hardcoded `requires-python` in `pyproject.toml`, removed from `copier.yaml`
+
 ## [0.1.0] - 2026-07-08
 
 ### Added
@@ -35,5 +60,6 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 - GitHub Actions quality workflow.
 - First packaged version of the Terradue Python project template.
 
-[Unreleased]: https://github.com/Terradue/python-project-template/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Terradue/python-project-template/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/Terradue/python-project-template/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/Terradue/python-project-template/releases/tag/v0.1.0

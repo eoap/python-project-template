@@ -33,7 +33,7 @@ Generated projects include:
 - Diátaxis documentation under `docs/`;
 - a top-level `mkdocs.yaml` wired directly to the generated documentation;
 - a `Taskfile.yaml` configured for `EOAP/taskfile-utils` remote Taskfiles;
-- a `.env.example` enabling remote Taskfiles with `TASK_X_REMOTE_TASKFILES=1`;
+- a `.env` enabling remote Taskfiles with `TASK_X_REMOTE_TASKFILES=1`;
 - GitHub Actions for quality checks, tests, package build, and documentation build;
 - a `src/` package layout and initial tests.
 
@@ -129,52 +129,22 @@ Move into the generated repository:
 cd my-new-project
 ```
 
-Copy the environment example file:
-
-```bash
-cp .env.example .env
-```
-
-The `.env` file is required because the generated `Taskfile.yaml` uses remote Taskfiles from `EOAP/taskfile-utils`, and remote Taskfiles require:
-
-```env
-TASK_X_REMOTE_TASKFILES=1
-```
-
 Create the Hatch environment:
 
 ```bash
 hatch env create
 ```
 
-Run the quality workflow:
-
-```bash
-task quality
-```
-
 Run the test suite directly with Hatch:
 
 ```bash
-hatch run test
+task quality:test
 ```
 
 Build the package:
 
 ```bash
 hatch build
-```
-
-Build the documentation:
-
-```bash
-hatch run docs:build
-```
-
-Serve the documentation locally:
-
-```bash
-hatch run docs:serve
 ```
 
 ## Step 5 — Customize project content
@@ -211,8 +181,8 @@ copier update
 For controlled updates, first tag a new archetype release:
 
 ```bash
-git tag v0.2.0
-git push origin v0.2.0
+git tag v0.X.0
+git push origin v0.X.0
 ```
 
 Then update the generated project using Copier's update workflow.
@@ -232,7 +202,6 @@ The main variables are defined in `copier.yaml`:
 | `repository_url` | Source repository URL. |
 | `documentation_url` | Published documentation URL. |
 | `copyright_year` | Year used in generated source headers. |
-| `python_version` | Minimum supported Python version. |
 | `license_id` | SPDX license identifier; default is `Apache-2.0`. |
 
 ## Development workflow for this archetype
@@ -241,7 +210,7 @@ When editing the archetype:
 
 1. Modify files under `template/`.
 2. Generate a disposable project locally with `copier copy . /tmp/example-project`.
-3. Run `hatch env create`, `task quality`, `hatch build`, and `hatch run docs:build` inside the generated project.
+3. Run `task quality:check`, `task quality:test`, `task quality:lint` inside the generated project.
 4. Commit the archetype changes.
 5. Tag a new release when the archetype is ready for consumers.
 
