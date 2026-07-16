@@ -16,27 +16,14 @@ limitations under the License.
 
 # {{ project_name }}
 
+[![PyPI - Version](https://img.shields.io/pypi/v/{{ project_slug  }}.svg)](https://pypi.org/project/{{ project_slug  }})
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/{{ project_slug  }}.svg)](https://pypi.org/project/{{ project_slug  }})
+
 {{ project_description }}
-
-## Bootstrap a project from this archetype
-
-```bash
-pipx install copier
-copier copy gh:Terradue/{{ project_slug }} my-new-project
-```
-
-Then enter the generated project and run:
-
-```bash
-cd my-new-project
-cp .env.example .env
-hatch env create
-task quality
-```
 
 ## Project conventions
 
-This template creates a Hatch-based Python package with:
+This project is templated a Hatch-based Python package with:
 
 - Apache-2.0 license
 - Keep a Changelog-compatible `CHANGELOG.md`
@@ -51,4 +38,4 @@ Project documentation is published at: {{ documentation_url }}
 
 ## License
 
-Licensed under the Apache License, Version 2.0. See `LICENSE`.
+[![Apache License, Version 2.0](https://img.shields.io/badge/license-Apache%20License%202.0-blue)](https://www.apache.org/licenses/LICENSE-2.0)
