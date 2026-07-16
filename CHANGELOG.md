@@ -34,6 +34,16 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ### Security
 
+## [0.3.0] - 2026-07-16
+
+### Added
+
+- `PyPI - Version` and `PyPI - Python Version` in `README.md`. 
+
+### Changed
+
+- License shield and link rather than just mere description in `README.md`.
+
 ## [0.2.0] - 2026-07-10
 
 ### Changed
