@@ -99,7 +99,7 @@ exclude_lines = [
 [tool.hatch.envs.test]
 description = "Test environment"
 skip-install = false
-dependencies = ["pytest==9.0.2", "pytest-cov==7.0.0"]
+dependencies = ["pytest>=9.1.1", "pytest-cov>=7.1.0"]
 
 [tool.hatch.envs.test.scripts]
 test = "pytest"
