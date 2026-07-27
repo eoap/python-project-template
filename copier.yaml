@@ -69,8 +69,3 @@ copyright_year:
   type: str
   help: Copyright year
   default: "2026"
-
-license_id:
-  type: str
-  help: SPDX license identifier
-  default: "Apache-2.0"
