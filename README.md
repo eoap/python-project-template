@@ -99,8 +99,8 @@ git push -u origin main
 Use tags so projects can be generated from a stable, repeatable archetype version:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.X.0
+git push origin v0.X.0
 ```
 
 Prefer generating projects from a tag rather than directly from `main`.
@@ -110,7 +110,7 @@ Prefer generating projects from a tag rather than directly from `main`.
 From another directory, run:
 
 ```bash
-copier copy --vcs-ref v0.4.0 https://github.com/eoap/python-project-template.git stripodi-test
+copier copy --vcs-ref v0.5.0 https://github.com/eoap/python-project-template.git stripodi-test
 ```
 
 Copier will ask for project metadata such as project name, package name, author, repository URL, and documentation URL.
