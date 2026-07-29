@@ -52,7 +52,7 @@ jobs:
         cache: "pip"
 
     - name: Install tooling
-      run: pip install hatch ruff==0.9.6 nose2
+      run: pip install hatch
 
     # -----------------------------
     # Strict SemVer + Hatch version gate
@@ -79,17 +79,20 @@ jobs:
           exit 1
         fi
 
-    - name: Ruff Check
-      run: ruff check .
+    - name: mypy (strict type checking)
+      run: hatch run dev:typecheck
 
-    - name: Ruff Lint
-      run: ruff format --check .
+    - name: ruff (format)
+      run: hatch run dev:lint
 
-    - name: Build package
-      run: hatch build
+    - name: ruff (check and McCabe complexity)
+      run: hatch run dev:check
 
-    - name: Test package
-      run: hatch test --verbose
+    - name: bandit (find common security issues)
+      run: hatch run dev:security
+
+    - name: pytest (test coverage)
+      run: hatch run test:test-cov
 
   publish:
 
