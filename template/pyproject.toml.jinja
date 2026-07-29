@@ -86,8 +86,7 @@ omit = [
 ]
 
 [tool.coverage.paths]
-{{ python_package }} = ["src/{{ python_package }}", "*/{{ python_package }}/src/{{ python_package }}"]
-tests = ["tests", "*/{{ python_package }}/tests"]
+{{ python_package }} = ["src/{{ python_package }}", "*/{{ project_slug }}/src/{{ python_package }}"]
 
 [tool.coverage.report]
 exclude_lines = [
@@ -106,7 +105,7 @@ dependencies = [
 [tool.hatch.envs.test.scripts]
 test = "pytest {args:tests}"
 testv = "pytest --verbose {args:tests}"
-test-cov = "pytest --cov={{ project_slug }} --cov-report=term-missing {args:tests}"
+test-cov = "pytest --cov={{ python_package }} --cov-report=term-missing {args:tests}"
 test-show-setup = "pytest --setup-show"
 
 [tool.pytest.ini_options]
